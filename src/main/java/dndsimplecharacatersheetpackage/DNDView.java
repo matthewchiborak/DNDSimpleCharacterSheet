@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -40,6 +41,10 @@ public class DNDView {
 		for(int i = 0; i <= 9; i++)
 			viewActions[i] = new ViewActions(obj, i, listener);
 		viewCounter = new ViewCounter(obj, listener);
+		
+		addButton = new JButton("Add");
+		addButton.setName("AddItem");
+		addButton.addActionListener(listener);
 	}
 	
 	private void setupLayouts()
@@ -56,6 +61,7 @@ public class DNDView {
 				totalPanel.add(viewActions[i]);
 		}
 		totalPanel.add(viewCounter);
+		totalPanel.add(addButton);
 		
 		frame.add(totalPanel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,4 +78,6 @@ public class DNDView {
 	private ViewSkills viewSkills;
 	private ViewActions viewActions[];
 	private ViewCounter viewCounter;
+	
+	private JButton addButton;
 }

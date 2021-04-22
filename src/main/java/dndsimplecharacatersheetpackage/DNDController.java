@@ -26,21 +26,30 @@ public class DNDController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		EventHandlerSavingThrows saveThrow = new EventHandlerSavingThrows(obj); 
-		obj = saveThrow.handle(e);
+		saveThrow.handle(e);
 		EventHandlerGeneral general = new EventHandlerGeneral(obj);
-		obj = general.handle(e);
+		general.handle(e);
 		EventHandlerSkills skills = new EventHandlerSkills(obj);
-		obj = skills.handle(e);
+		skills.handle(e);
 		EventHandlerActions actions = new EventHandlerActions(obj);
-		obj = actions.handle(e);
+		actions.handle(e);
 		EventHandlerCounters counters = new EventHandlerCounters(obj);
-		obj = counters.handle(e);
+		counters.handle(e);
+		EventHandlerAddItem addItem = new EventHandlerAddItem(obj, addItemView);
+		addItem.handle(e);
 		
 		//Save
 		if(((JButton)e.getSource()).getName().equals("Save"))
 		{
 			DNDFileReader fr = new DNDFileReader();
 			fr.writeContents(obj, "D:\\eclipse-workspace\\DNDSimpleCharacterSheet\\CharacterInfo.json");
+		}
+		
+		if(((JButton)e.getSource()).getName().equals("AddItem"))
+		{
+			addItemView = new AddItemView(obj, this);
+			addItemView.show();
+			return;
 		}
 		
 		view.hide();
@@ -50,4 +59,5 @@ public class DNDController implements ActionListener {
 	
 	JSONObject obj;
 	DNDView view;
+	AddItemView addItemView;
 }
