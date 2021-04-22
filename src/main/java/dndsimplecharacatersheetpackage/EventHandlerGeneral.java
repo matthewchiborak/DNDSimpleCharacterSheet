@@ -52,8 +52,14 @@ public class EventHandlerGeneral extends DNDEventHandler {
 		
 		String splitCheck[] = ((JButton)e.getSource()).getName().split(",");
 		if(splitCheck[0].equals("HitDieRoll"))
-		{
-			copyToClipboard("/r " + splitCheck[1] + "d" + obj.get("MaxHitDie").toString());
+		{			
+			int bonusMod = convertScoreToModifier(Integer.valueOf(obj.get("ConstitutionScore").toString()));
+			if(bonusMod > 0)
+				copyToClipboard("/r " + splitCheck[1] + "d" + obj.get("MaxHitDie").toString() + " + " + String.valueOf(bonusMod * Integer.parseInt(splitCheck[1])));
+			else if(bonusMod < 0)
+				copyToClipboard("/r " + splitCheck[1] + "d" + obj.get("MaxHitDie").toString() + " " + String.valueOf(bonusMod * Integer.parseInt(splitCheck[1])));
+			else
+				copyToClipboard("/r " + splitCheck[1] + "d" + obj.get("MaxHitDie").toString());
 		}
 		
 		return obj;

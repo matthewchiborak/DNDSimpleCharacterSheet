@@ -7,17 +7,14 @@ import java.awt.event.ActionEvent;
 
 import org.json.simple.JSONObject;
 
-public class DNDEventHandler {
+abstract public class DNDEventHandler {
 
 	public DNDEventHandler(JSONObject obj)
 	{
 		this.obj = obj;
 	}
 	
-	public JSONObject handle(ActionEvent e)
-	{
-		return obj;
-	}
+	abstract public JSONObject handle(ActionEvent e);
 	
 	protected void copyToClipboard(String s)
 	{
