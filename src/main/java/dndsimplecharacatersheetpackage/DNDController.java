@@ -12,10 +12,11 @@ import org.json.simple.JSONObject;
 
 public class DNDController implements ActionListener {
 
-	public DNDController(JSONObject obj)
+	public DNDController(JSONObject obj, String filePathSave)
 	{
 		this.obj = obj;
 		view = new DNDView(obj, this);
+		this.filePathSave = filePathSave;
 	}
 	
 	public void run()
@@ -42,7 +43,7 @@ public class DNDController implements ActionListener {
 		if(((JButton)e.getSource()).getName().equals("Save"))
 		{
 			DNDFileReader fr = new DNDFileReader();
-			fr.writeContents(obj, "D:\\eclipse-workspace\\DNDSimpleCharacterSheet\\CharacterInfo.json");
+			fr.writeContents(obj, filePathSave);
 		}
 		
 		if(((JButton)e.getSource()).getName().equals("AddItem"))
@@ -57,6 +58,7 @@ public class DNDController implements ActionListener {
 		view.show();
 	}
 	
+	String filePathSave;
 	JSONObject obj;
 	DNDView view;
 	AddItemView addItemView;
